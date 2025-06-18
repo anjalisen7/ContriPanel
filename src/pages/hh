@@ -1,0 +1,39 @@
+   <div className="container mt-4">
+        <h4>All Committees</h4>
+        <table className="table table-bordered">
+          <thead className="table-dark">
+            <tr>
+              <th>Sno</th>
+              <th>Name</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Amount</th>
+              <th>Draw Date</th>
+              <th>Members</th>
+            </tr>
+          </thead>
+          <tbody>
+            {committees.length > 0 ? (
+              committees.map((c, i) => (
+                <tr key={c.id}>
+                  <td>{i + 1}</td>
+                  <td>{c.ComitteeName}</td>
+                  <td>{c.Start_date}</td>
+                  <td>{c.End_date}</td>
+                  <td>{c.Total_Amount}</td>
+                  <td>{c.Draw_Date}</td>
+                  <td>
+                    {c.Members && c.Members.length > 0
+                      ? c.Members
+                      : "No Members"}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7" className="text-center">No Committees Found</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>

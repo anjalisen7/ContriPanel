@@ -117,11 +117,11 @@ export default function AddUserComponent() {
         <nav className="col-md-3 col-lg-2 bg-primary text-white p-3 d-flex flex-column justify-content-between">
           <div>
             <h4 className="text-center mb-4">Admin Panel</h4>
-            <button className="btn btn-outline-light mb-2" onClick={() => navigate("/dashboard")}>Dashboard</button>
-            <button className="btn btn-outline-light mb-2" onClick={() => navigate("/dashboard/add-user")}>Add / Modify User</button>
-            <button className="btn btn-outline-light mb-2" onClick={() => navigate("/dashboard/committees")}>Committee List</button>
-            <button className="btn btn-outline-light mb-2" onClick={() => navigate("/dashboard/contributions")}>View Contributions</button>
-            <button className="btn btn-outline-light mb-2" onClick={() => navigate("/dashboard/winner")}>Pick Winner (30th)</button>
+            <button className="btn btn-outline-light mb-2 w-100 text-start" onClick={() => navigate("/dashboard")}>Dashboard</button>
+            <button className="btn btn-outline-light mb-2 w-100 text-start" onClick={() => navigate("/dashboard/add-user")}>Add / Modify User</button>
+            <button className="btn btn-outline-light mb-2 w-100 text-start" onClick={() => navigate("/dashboard/committees")}>Committee List</button>
+            <button className="btn btn-outline-light mb-2 w-100 text-start" onClick={() => navigate("/dashboard/contributions")}>View Contributions</button>
+            <button className="btn btn-outline-light mb-2 w-100 text-start" onClick={() => navigate("/dashboard/winner")}>Pick Winner (30th)</button>
           </div>
           <button className="btn btn-danger mt-4" onClick={() => navigate("/")}>Logout</button>
         </nav>
@@ -136,7 +136,7 @@ export default function AddUserComponent() {
           </div>
 
           <table className="table table-bordered">
-            <thead className="table-dark">
+            <thead className="table-primary">
               <tr>
                 <th>Sno</th>
                 <th>Name</th>
