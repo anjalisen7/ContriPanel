@@ -1,14 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST");
-header("Content-Type: application/json");
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-$input = json_decode(file_get_contents("php://input"), true);
+include('dbcon.php');
 
 if (!$input) {
     echo json_encode(["status" => "error", "message" => "Invalid JSON input"]);

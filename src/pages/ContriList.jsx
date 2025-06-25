@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Table from "../Components/Table";
+  const API = process.env.REACT_APP_API_BASE;
+
+
 
 export default function ContriListComponent() {
+
+  const contributionColumns = [
+  { label: "Name", key: "Name" },
+  { label: "Amount", key: "ContiAmount" },
+  { label: "Committee Name", key: "ComiteeName" },
+  { label: "Date", key: "Date" },
+];
+  
   const [committees, setCommittees] = useState([]);
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
@@ -15,7 +27,7 @@ export default function ContriListComponent() {
           setUsername(name.username);
 
           
-          fetch("http://localhost/react-projects/ContriApp/Server/api/getContriList.php", {
+          fetch(`${API}/getContriList.php`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username: name.username }),
@@ -59,36 +71,13 @@ export default function ContriListComponent() {
         {/* Main content */}
         <main className="col-md-9 col-lg-10 p-4">
           <h4>{username}, Your Contributions</h4>
-          <table className="table table-bordered mt-3">
-            <thead className="table-dark">
-              <tr>
-                <th>Sno</th>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Committee Name</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {committees.length > 0 ? (
-                committees.map((contri, i) => (
-                  <tr key={contri.id}>
-                    <td>{i + 1}</td>
-                    <td>{contri.Name}</td>
-                    <td>{contri.ContiAmount}</td>
-                    <td>{contri.ComiteeName}</td>
-                    <td>{contri.Date}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="5" className="text-center">
-                    No Contributions Found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+
+          <Table
+            columns={contributionColumns}
+            data={committees}
+            headerClass="table-success"
+          />
+          
         </main>
       </div>
     </div>

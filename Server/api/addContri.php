@@ -1,8 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Content-Type: application/json");
+include('dbcon.php'); 
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -10,14 +7,6 @@ if (!isset($data->username, $data->committee, $data->amount, $data->date)) {
     echo json_encode(["status" => "error", "message" => "Missing required fields"]);
     exit;
 }
-
-$conn = new mysqli("localhost", "root", "", "contribution", "3307");
-
-if ($conn->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Database connection failed"]);
-    exit;
-}
-
 
 $uid = "";
 $checkStmt = $conn->prepare("SELECT uid FROM contri WHERE Name = ? AND ComiteeName = ? LIMIT 1");
@@ -31,7 +20,6 @@ if ($row = $result->fetch_assoc()) {
     $uid = uniqid("mem_", true);
 }
 $checkStmt->close();
-
 
 $stmt = $conn->prepare("INSERT INTO contri (Uid, Name, ComiteeName, ContiAmount, date) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("sssds", $uid, $data->username, $data->committee, $data->amount, $data->date);

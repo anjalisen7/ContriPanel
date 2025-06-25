@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "../Components/Button";
+import Input from "../Components/Input";
+
+  const API = process.env.REACT_APP_API_BASE;
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -13,7 +17,7 @@ export default function Login() {
 
     try {
       const response = await fetch(
-        "http://localhost/react-projects/ContriApp/Server/api/login.php",
+        `${API}/login.php`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -28,7 +32,7 @@ export default function Login() {
       try {
         data = JSON.parse(raw);
       } catch (parseError) {
-        console.error("❌ JSON parse error:", parseError);
+       
         Swal.fire("Error", "Invalid server response format!", "error");
         return;
       }
@@ -56,7 +60,7 @@ export default function Login() {
         Swal.fire("Login Failed", data.message || "Invalid credentials", "error");
       }
     } catch (err) {
-      console.error("❌ Fetch error:", err);
+   
       Swal.fire("Error", "Unable to connect to server", "error");
     }
   };
@@ -67,34 +71,38 @@ export default function Login() {
         <h3 className="text-center mb-4">🔐 Login</h3>
         <form onSubmit={handleLogin}>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input
-              type="text"
-              className="form-control"
+          
+
+             <Input
+              label="Username"
               id="username"
               placeholder="Enter username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              autocomplete="off"
               required
             />
+
           </div>
 
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          
+              <Input
+                label="Password"
+                id="password"
+                placeholder="Enter password"
+                value={password}
+                 autocomplete="off"
+                onChange={(e)=> setPassword(e.target.value)}
+              />
           </div>
-
-          <button type="submit" className="btn btn-primary w-100">
+          <Button
+            type="submit"
+            className="btn"
+            style={{ backgroundColor: "green", color: "#fff", border: "none",width:"100" }}
+          >
             Login
-          </button>
+          </Button>
         </form>
       </div>
     </div>
