@@ -1,11 +1,11 @@
 <?php
 include('dbcon.php');
+$input = json_decode(file_get_contents("php://input"), true);
 
 if (!$input) {
     echo json_encode(["status" => "error", "message" => "Invalid JSON input"]);
     exit;
 }
-
 
 $name        = $input['name'] ?? '';
 $startDate   = $input['startDate'] ?? '';
